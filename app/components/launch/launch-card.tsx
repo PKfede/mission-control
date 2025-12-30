@@ -15,7 +15,7 @@ const LaunchCard: React.FC<LaunchType> = ({
   details,
 }) => {
   const link: string = links.patch.small;
-  const embed: string = "https://www.youtube.com/embed?" + links.youtube_id
+  const embed: string = "https://www.youtube.com/embed?" + links.youtube_id;
   // const modal = useRef<ModalObject>(null)
 
   // function handleModal() {
@@ -25,8 +25,6 @@ const LaunchCard: React.FC<LaunchType> = ({
   // }
 
   const [modal, setModal] = useState<boolean>(false);
-
-
 
   return (
     <div className="bg-green-950 flex flex-col justify-between items-center px-3.5 py-3.5 border-2 rounded-3xl min-w-fit">
@@ -42,8 +40,8 @@ const LaunchCard: React.FC<LaunchType> = ({
         </Image>
         <p className="w-1/2 m-3.5">{details}</p>
         <p className="w-1/2 m-3.5">{links.webcast}</p>
-        <Suspense fallback='loading...'>
-          <iframe width={100} height={60} src={embed}></iframe>
+        <Suspense fallback={<p>Loading...</p>}>
+          <iframe width={300} height={150} loading="lazy" src={embed}></iframe>
         </Suspense>
       </Modal>
       <div className="">
