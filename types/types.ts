@@ -1,10 +1,10 @@
 export interface LaunchType {
-  id:number;
+  id:string;
   rocket: string;
   launchpad: string;
   date_utc: string
-  success: boolean;
-  details:string
+  success: boolean | null;
+  details:string;
   links:{
     patch: {
         small: string;
