@@ -1,6 +1,8 @@
 export interface LaunchType {
   id:string;
   rocket: string;
+  name: string;
+  flight_number: number;
   launchpad: string;
   date_utc: string
   success: boolean | null;

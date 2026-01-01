@@ -4,10 +4,13 @@ import { LaunchType, ModalObject } from "@/types/types";
 import Image from "next/image";
 import React, { ReactElement, Suspense, useRef, useState } from "react";
 import Modal from "../modal/modal";
+import LoadingElement from "@/app/loading";
 
 const LaunchCard: React.FC<LaunchType> = ({
   id,
   rocket,
+  name,
+  flight_number,
   launchpad,
   date_utc,
   success,
@@ -21,23 +24,30 @@ const LaunchCard: React.FC<LaunchType> = ({
   return (
     <>
       {modal ? (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="w-1/5 bg-amber-800 font-bold">
+        <div className="fixed inset-0 flex z-10 items-center justify-center text-white">
+          <div className="min-w-screen max-w-68 h-screen bg-black/50 backdrop-blur-sm font-bold rounded-2xl px-14">
             <Modal modal={modal} onClose={() => setModal(false)}>
               <Image
                 src={link}
                 alt="crew patch"
-                className="m-3.5"
+                className="m-10"
                 height={150}
                 width={150}
               ></Image>
-              <p className=" m-3">{details ? details : "No details logged"}</p>
-              <Suspense fallback={<p>Loading...</p>}>
+              <div className=" ">
+              <p >Mission Id: {id}</p>
+              <p>Rocket Id: {rocket}</p>
+              <p>LaunchPad Id: {launchpad}</p>
+              <p className="mt-12 mb-12">{details ? details : "No details logged"}</p>
+              </div>
+
+              <Suspense fallback={<LoadingElement/>}>
                 <div className="m-2">
                   <iframe
                     loading="lazy"
                     src={modal ? embed : undefined}
-                    className="w-full "
+                    height={300}
+                    width={600}
                   ></iframe>
                 </div>
               </Suspense>
@@ -46,8 +56,8 @@ const LaunchCard: React.FC<LaunchType> = ({
         </div>
       ) : null}
 
-      <div className="bg-green-950 flex flex-col justify-between items-center px-3.5 py-3.5 border-2 rounded-xl min-w-68">
-        <div className="">
+      <div className=" bg-white/30 backdrop-blur-sm shadow-2xl shadow-cyan-500/50 text-black flex flex-col justify-between items-center px-3.5 py-3.5 rounded-xl min-w-68 max-w-96 h-fill">
+        <div className="flex flex-col justify-between items-center">
           {link ? (
             <Image
               src={link}
@@ -56,19 +66,19 @@ const LaunchCard: React.FC<LaunchType> = ({
               width={150}
             ></Image>
           ) : null}
+          <h1 className="font-bold text-2xl mt-5 mb-5">{name}</h1>
         </div>
         <div>
-        <p>{id}</p>
-        <p>Rocket Id: {rocket}</p>
-        <p>LaunchPad Id: {launchpad}</p>
-        <p>Date: {date_utc}</p>
-        <p>Mission Success: {success ? "Yes" : "No"}</p>
+          <p>Flight Number: {flight_number}</p>
+
+          <p>Date: {date_utc}</p>
+          <p>Mission Success: {success ? "Yes" : "No"}</p>
         </div>
         <button
           onClick={() => {
             setModal(true);
           }}
-          className="bg-purple-400 p-3 mt-3.5 my-3.5"
+          className="bg-cyan-600 rounded-xl min-w-52 p-3 mt-3.5 my-3.5"
         >
           Details
         </button>
