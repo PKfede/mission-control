@@ -12,9 +12,10 @@ export interface LaunchType {
         small: string;
         large: string;
     }
-    webcast: string
-    youtube_id: string
+    webcast: string;
+    youtube_id: string;
   }
+  launches: LaunchType[];
 }
 
 export interface ModalObject {

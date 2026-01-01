@@ -69,7 +69,14 @@ export default function Home() {
         <Sidebar
           handleSetFilter={handleSetFilter}
         />
-        <LaunchGrid launches={filteredData.length ? filteredData : data} />
+        <LaunchGrid launches={filteredData.length ? filteredData : data} id={""} rocket={""} name={""} flight_number={0} launchpad={""} date_utc={""} success={null} details={""} links={{
+          patch: {
+            small: "",
+            large: ""
+          },
+          webcast: "",
+          youtube_id: ""
+        }} />
       </main>
     </>
   );
